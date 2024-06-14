@@ -1,6 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views import View
 
-def index(request):
-    return HttpResponse('article')
+from hexlet_django_blog.article.models import Article
+
+class IndexView(View):
+
+    def get(self, request, *args, **kwargs):
+        articles = Article.objects.all()[:15]
+        return render(request, 'articles.html', context={
+            'articles': articles,
+        })
+
+
 # Create your views here.

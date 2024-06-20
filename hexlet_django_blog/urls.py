@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from hexlet_django_blog import views
+from hexlet_django_blog.article.views import ArticleCommentsView
 
 urlpatterns = [
     
     path('about/', views.about),
     path('articles/', include('hexlet_django_blog.article.urls')),
     path('admin/', admin.site.urls),
-    path('', views.TemplateView.as_view(template_name='index.html'))
+    path('', views.TemplateView.as_view(template_name='index.html')),
+    path('<int:article_id>/comments/<int:id>/', ArticleCommentsView.as_view()),
 ]
